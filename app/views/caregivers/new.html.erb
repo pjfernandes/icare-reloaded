@@ -1,0 +1,80 @@
+<h2 class="title text-center mb-3"><i class="fas fa-user-plus text-primary"></i> Novo usuário</h2>
+
+<div class="buttons text-center">
+  <%=link_to "Cliente", new_client_path, class: "btn btn-primary mr-2 mt-2" %>
+  <%=link_to "Cuidador", new_caregiver_path, class: "btn btn-secondary mr-2 mt-2" %>
+</div>
+
+<%= simple_form_for [@caregiver] do |f| %>
+  <div class="form-inputs mt-2">
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true,
+                label: "Nome",
+                input_html: { autocomplete: "nome" }%>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true,
+                label: "Sobrenome",
+                input_html: { autocomplete: "sobrenome" }%>
+    <%= f.input :email,
+                required: true,
+                autofocus: true,
+                label: "E-mail",
+                input_html: { autocomplete: "email" }%>
+    <%= f.input :street,
+            required: true,
+            autofocus: true,
+            label: "Rua",
+            input_html: { autocomplete: "Rua" }%>
+
+    <%= f.input :number,
+      required: true,
+      autofocus: true,
+      label: "Número",
+      input_html: { autocomplete: "Número" }%>
+
+    <%= f.input :district,
+      required: true,
+      autofocus: true,
+      label: "Bairro",
+      input_html: { autocomplete: "Bairro" }%>
+
+    <%= f.input :complement,
+      required: false,
+      autofocus: true,
+      label: "Complemento",
+      input_html: { autocomplete: "Complemento" }%>
+      <%= f.input :city,
+                required: true,
+                autofocus: true,
+                label: "Cidade",
+                input_html: { autocomplete: "cidade" }%>
+          <%= f.input :formation,
+                required: true,
+                autofocus: true,
+                label: "Formação",
+                input_html: { autocomplete: "formação" },
+                as: :text%>
+          <%= f.input :care_type,  as: :select, collection: [['Cuidador(a)', 'cuidador'], ['Cozinheiro(a)', 'cozinheiro'],['Enfermeiro(a)', 'enfermeiro'], ['Fisioterapeuta', 'fisioterapeuta']], :prompt => 'Selecione', label:'Tipo de cuidado', required: true %>
+          <%= f.input :value,
+                required: true,
+                autofocus: true,
+                label: "Valor (R$) por dia",
+                input_html: { autocomplete: "valor" }%>
+    <%= f.input :photo, as: :file %>
+    <%= f.input :password,
+                required: true,
+                label: "Senha",
+                hint: ("Mínimo: #{@minimum_password_length} caracteres" if @minimum_password_length),
+                input_html: { autocomplete: "new-password" } %>
+    <%= f.input :password_confirmation,
+                label: "Confirmação da senha",
+                required: true,
+                input_html: { autocomplete: "new-password" } %>
+  </div>
+
+<div class="form-actions">
+  <%= f.button :submit, "Cadastrar", class:"btn btn-primary btn mb-2" %>
+</div>
+<% end %>

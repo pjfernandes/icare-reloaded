@@ -1,4 +1,4 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h2 class="title text-center mb-3"><i class="fas fa-user-plus text-primary"></i> Editar usuário</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= f.error_notification %>
@@ -6,30 +6,87 @@
   <div class="form-inputs">
     <%= f.input :email, required: true, autofocus: true %>
 
+      <%= f.input :first_name,
+              required: true,
+              autofocus: true,
+              label: "Nome",
+              input_html: { autocomplete: "nome" }%>
+  <%= f.input :last_name,
+              required: true,
+              autofocus: true,
+              label: "Sobrenome",
+              input_html: { autocomplete: "sobrenome" }%>
+  <%= f.input :email,
+              required: true,
+              autofocus: true,
+              label: "E-mail",
+              input_html: { autocomplete: "email" }%>
+   <%= f.input :street,
+            required: true,
+            autofocus: true,
+            label: "Rua",
+            input_html: { autocomplete: "Rua" }%>
+
+    <%= f.input :number,
+      required: true,
+      autofocus: true,
+      label: "Número",
+      input_html: { autocomplete: "Número" }%>
+
+    <%= f.input :district,
+      required: true,
+      autofocus: true,
+      label: "Bairro",
+      input_html: { autocomplete: "Bairro" }%>
+
+    <%= f.input :complement,
+      required: false,
+      autofocus: true,
+      label: "Complemento",
+      input_html: { autocomplete: "Complemento" }%>
+      <%= f.input :city,
+                required: true,
+                autofocus: true,
+                label: "Cidade",
+                input_html: { autocomplete: "cidade" }%>
+
+    <% if current_user.type == "Caregiver"%>
+            <%= f.input :formation,
+                required: true,
+                autofocus: true,
+                label: "Formação",
+                input_html: { autocomplete: "formação" }%>
+          <%= f.input :care_type,  as: :select, collection: [['Cuidador(a)', 'cuidador'], ['Cozinheiro(a)', 'cozinheiro'],['Enfermeiro(a)', 'enfermeiro'], ['Fisioterapeuta', 'fisioterapeuta']], :prompt => 'Selecione', label:'Tipo de cuidado', required: true %>
+          <%= f.input :value,
+                required: true,
+                autofocus: true,
+                label: "Valor (R$) por hora",
+                input_html: { autocomplete: "valor" }%>
+
+    <% end %>
+
     <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
       <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
     <% end %>
 
     <%= f.input :password,
-                hint: "leave it blank if you don't want to change it",
+                hint: "Deixe em branco caso não queira mudar",
                 required: false,
+                label: "Senha",
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :password_confirmation,
                 required: false,
+                label: "Confirme a nova senha",
                 input_html: { autocomplete: "new-password" } %>
     <%= f.input :current_password,
-                hint: "we need your current password to confirm your changes",
+                hint: "Sua senha atual",
+                label: "Senha atual",
                 required: true,
                 input_html: { autocomplete: "current-password" } %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, "Editar", class: "btn btn-primary" %>
+    <%= link_to "Voltar", :back, class: "btn btn-secondary ml-2"%>
   </div>
 <% end %>
-
-<h3>Cancel my account</h3>
-
-<div>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?", turbo_confirm: "Are you sure?" }, method: :delete %></div>
-
-<%= link_to "Back", :back %>

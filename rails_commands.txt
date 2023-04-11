@@ -1,0 +1,19 @@
+rails g model Caregiver user:references care_type:string value:float formation:string
+
+rails g model Client user:references
+
+rails g model Order client:references caregiver:references days:integer total_price:float payment_type:string payment_status:string caregiver_accept:boolean
+
+rails generate migration AddFirstNameLastNameTypeAddressCityToUsers first_name:string last_name:string type:string address:string city:string
+
+rails g migration AddStreetNumberComplementToUsers street:string number:integer district:string complement:string
+
+rails g migration AddLatitudeLongitudeToUsers latitude:float longitude:float
+
+rails g migration AddCareTypeValueFormationToUsers care_type:string value:float formation:string
+
+rails g controller caregivers_controller
+rails g controller clients_controller
+rails g controller orders_controller
+
+rails db:migrate

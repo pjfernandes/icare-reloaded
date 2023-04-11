@@ -1,5 +1,7 @@
 .navbar-lewagon {
+  display: flex;
   justify-content: space-between;
+  flex-direction: row;
   background: white;
 }
 
@@ -9,4 +11,16 @@
 
 .navbar-lewagon .navbar-brand img {
   width: 40px;
+}
+
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.title {
+  font-size: 28px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
