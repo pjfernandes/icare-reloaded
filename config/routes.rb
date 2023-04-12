@@ -3,4 +3,5 @@ Rails.application.routes.draw do
   root to: "pages#home"
   resources :clients, only: [:new, :create]
   resources :caregivers, only: [:new, :create, :index, :show]
+  resources :orders
 end

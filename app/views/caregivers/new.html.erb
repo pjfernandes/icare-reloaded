@@ -53,8 +53,8 @@
           <%= f.input :formation,
                 required: true,
                 autofocus: true,
-                label: "Formação",
-                input_html: { autocomplete: "formação" },
+                label: "Currículo",
+                input_html: { autocomplete: "currículo" },
                 as: :text%>
           <%= f.input :care_type,  as: :select, collection: [['Cuidador(a)', 'cuidador'], ['Cozinheiro(a)', 'cozinheiro'],['Enfermeiro(a)', 'enfermeiro'], ['Fisioterapeuta', 'fisioterapeuta']], :prompt => 'Selecione', label:'Tipo de cuidado', required: true %>
           <%= f.input :value,

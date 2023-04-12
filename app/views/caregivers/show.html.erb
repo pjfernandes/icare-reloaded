@@ -7,21 +7,21 @@
 <div class="text-center point-description border rounded bg-white mb-2 text-break text-left mt-3">
   <div class="p-3">
     <h5 class="page-title mb-3"><i class="fa-solid fa-heart text-danger"></i> <%= @caregiver.care_type.capitalize %></h5>
-    <p><strong>Formação</strong></p>
+    <p><strong>Currículo</strong></p>
     <p><%= @caregiver.formation.capitalize %></p>
     <p><strong>Cidade:</strong> <%= @caregiver.city.capitalize %></p>
-    <p><strong>Valor por hora (R$):</strong> <%= @caregiver.value %></p>
+    <p><strong>Diária (R$):</strong> <%= @caregiver.value %></p>
   </div>
 </div>
 
 <div class="buttons text-center pt-2">
-  <%= link_to "Contato", "#", class: "contact btn btn-primary text-white"%>
+  <%= link_to "Contratar", new_order_path(@caregiver), class: "contact btn btn-primary text-white"%>
   <%= link_to "Voltar", caregivers_path, class: "btn btn-secondary"%>
 </div>
 
-<script>
+<%# <script>
   const contact = document.querySelector(".contact")
   contact.addEventListener("click", ((event) => {
     alert("O cuidador foi contatado")
   }))
-</script>
+</script> %>

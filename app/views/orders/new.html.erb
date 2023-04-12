@@ -1,0 +1,15 @@
+<%= simple_form_for [@order, @caregiver] do |f| %>
+  <div class="form-inputs mt-2">
+    <%= f.input :days,
+                required: true,
+                autofocus: true,
+                label: "Dias de trabalho",
+                input_html: { autocomplete: "dias" }%>
+
+    <%= @caregiver.value * days %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit, "Contratar", class:"btn btn-primary btn mb-2" %>
+  </div>
+<% end %>
