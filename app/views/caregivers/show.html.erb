@@ -1,8 +1,10 @@
 <h2 class="title mb-2 text-center"><i class="fa-solid fa-user text-primary"></i> <%= @caregiver.first_name.capitalize + " " + @caregiver.last_name.capitalize%></span></h2>
 
-<div class="text-center">
-  <%= image_tag @caregiver.photo, height: 300, width: 400, crop: :fill, class: "rounded-circle w-50 h-50" %>
-</div>
+<% if @caregiver.photo.attached? %>
+  <div class="text-center">
+    <%= image_tag @caregiver.photo, height: 300, width: 400, crop: :fill, class: "rounded-circle w-50 h-50" %>
+  </div>
+<% end %>
 
 <div class="text-center point-description border rounded bg-white mb-2 text-break text-left mt-3">
   <div class="p-3">
@@ -15,8 +17,8 @@
 </div>
 
 <div class="buttons text-center pt-2">
-  <%= link_to "Contratar", new_order_path(@caregiver), class: "contact btn btn-primary text-white"%>
-  <%= link_to "Voltar", caregivers_path, class: "btn btn-secondary"%>
+  <%= link_to "Contratar", new_caregiver_order_path(@caregiver), class: "contact btn btn-primary text-white"%>
+  <%= link_to "Voltar", :back, class: "btn btn-secondary"%>
 </div>
 
 <%# <script>

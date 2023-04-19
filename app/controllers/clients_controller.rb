@@ -7,7 +7,6 @@ class ClientsController < ApplicationController
 
   def create
     @client = Client.new(client_params)
-    #@client.user = current_user
     if @client.save
       redirect_to root_path, notice: 'Seja bem-vindo(a)!'
     else
@@ -35,7 +34,8 @@ class ClientsController < ApplicationController
     :city,
     :latitude,
     :longitude,
-    :password
+    :password,
+    :id
     )
   end
 end

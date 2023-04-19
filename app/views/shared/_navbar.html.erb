@@ -16,10 +16,14 @@
           <li class="nav-item d-flex justify-content-center">
             <%= link_to "Ver cuidadores", caregivers_path, class: "nav-link mr-1" %>
           </li>
+
           <% if user_signed_in? %>
             <li class="nav-item dropdown text-center">
               <%= link_to "", "#", class: "fa-solid fa-user-astronaut h5 mt-2 avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
               <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
+                <% if current_user.type == "Client" %>
+                  <%= link_to "Meus pedidos", orders_path, class: "dropdown-item" %>
+                <% end %>
                 <%= link_to "Editar perfil", edit_user_registration_path, class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </div>

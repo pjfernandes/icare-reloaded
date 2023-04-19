@@ -1,18 +1,23 @@
 class OrdersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
+  def index
+    @orders = Order.where(id: current_user.id)
+  end
 
   def new
+    @caregiver = Caregiver.find(params[:caregiver_id])
     @order = Order.new
   end
 
   def create
+    @caregiver = Caregiver.find(params[:caregiver_id])
     @order = Order.new(order_params)
+    @order.caregiver_id = @caregiver.id
     @order.client_id = current_user.id
-    @order.caregiver = @caregiver
-
-    raise
 
     if @order.save
-      redirect_to order_path(current_user), notice: 'Seja bem-vindo(a)!'
+      redirect_to orders_path, notice: 'Pedido enviado!'
     else
       render :new
     end
