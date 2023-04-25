@@ -1,11 +1,11 @@
 <% if current_user.type == "Client" %>
   <h2 class="title mb-2 text-center"><i class="fa-solid fa-cart-shopping text-primary"></i> Meus pedidos</h2>
-<% else %>
+<% elsif current_user.type == "Caregiver" %>
     <h2 class="title mb-2 text-center"><i class="fa-solid fa-user text-info"></i> Meus clientes</h2>
 <% end %>
 
 <div class="caregivers-container ">
-  <%@orders.each do |order|%>
+  <%@orders.reverse.each do |order|%>
     <% if current_user.type == "Client" %>
       <div class="card-product mt-3 mb-4 rounded d-flex justify-content-between p-2 border border-primary rounded">
         <div class="card-product-infos text-break">

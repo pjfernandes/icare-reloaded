@@ -17,6 +17,4 @@ Rails.application.routes.draw do
     resources :orders
   end
 
-  #get 'order_accept', to: 'orders#order_accept'
-  #put 'order_accept', to: 'orders#order_accept'
 end

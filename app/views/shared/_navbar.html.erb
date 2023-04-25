@@ -1,8 +1,20 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon border border-primary fixed-top">
   <div class="container-fluid">
-    <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "logo.jpg", style: 'height:50px;width:50px;' %>
-      <span class="title mt-1"><span class="text-primary">i</span><span>Care</span></span>
+    <% if user_signed_in? && current_user.type =="Client"%>
+      <%= link_to caregivers_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.jpg", style: 'height:50px;width:50px;' %>
+        <span class="title mt-1"><span class="text-primary">i</span><span>Care</span></span>
+      <% end %>
+    <% elsif user_signed_in? && current_user.type == "Caregiver"%>
+      <%= link_to orders_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.jpg", style: 'height:50px;width:50px;' %>
+        <span class="title mt-1"><span class="text-primary">i</span><span>Care</span></span>
+      <% end %>
+    <% else %>
+      <%= link_to root_path, class: "navbar-brand" do %>
+        <%= image_tag "logo.jpg", style: 'height:50px;width:50px;' %>
+        <span class="title mt-1"><span class="text-primary">i</span><span>Care</span></span>
+      <% end %>
     <% end %>
 
 
@@ -19,7 +31,11 @@
 
           <% if user_signed_in? %>
             <li class="nav-item dropdown text-center">
-              <%= link_to "", "#", class: "fa-solid fa-user-astronaut h5 mt-2 avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% if current_user.type == "Client" %>
+                <%= link_to "", "#", class: "fa-solid fa-user h5 mt-2 avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% elsif current_user.type == "Caregiver" %>
+                <%= link_to "", "#", class: "fa-solid fa-user-nurse h5 mt-2 avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+              <% end %>
               <div class="dropdown-menu dropdown-menu-end text-center" aria-labelledby="navbarDropdown">
                 <% if current_user.type == "Client" %>
                   <%= link_to "Meus pedidos", orders_path, class: "dropdown-item" %>

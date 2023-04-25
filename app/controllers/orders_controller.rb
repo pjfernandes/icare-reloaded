@@ -2,7 +2,11 @@ class OrdersController < ApplicationController
   skip_before_action :verify_authenticity_token
 
   def index
-    @orders = Order.where(id: current_user.id)
+    if current_user.type == "Client"
+      @orders = Order.where(client_id: current_user.id)
+    else
+      @orders = Order.where(caregiver_id: current_user.id)
+    end
   end
 
   def new
@@ -27,7 +31,7 @@ class OrdersController < ApplicationController
     order = Order.find(params[:id])
     order.caregiver_accept = true
     order.save
-    render orders_path
+    redirect_to orders_path
   end
 
 

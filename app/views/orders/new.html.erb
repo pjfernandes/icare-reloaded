@@ -20,6 +20,11 @@
     <%= f.input :card_number, label: "Número do cartão" %>
     <%= f.input :card_name, label: "Nome do cartão" %>
     <%= f.input :card_number, label: "Validade" %>
+    <input value=<%="#{@caregiver.value}"%> id="value" hidden>
+    <div class="mb-3 float optional order_total_price">
+      <label class="form-label float optional" for="order_total_price">Preço (R$)</label>
+      <input readonly="readonly" class="form-control numeric float optional" type="number" step="any" name="order[total_price]" id="order_total_price">
+    </div>
   </div>
 
   <div class="form-actions">
@@ -27,3 +32,11 @@
     <%= link_to "Voltar", :back, class: "btn btn-secondary btn mb-2"%>
   </div>
 <% end %>
+
+<script>
+  const days = document.querySelector("#order_days");
+  const value = document.querySelector("#value");
+  days.addEventListener("focusout", (e) => {
+    document.querySelector("#order_total_price").value = '';
+    document.querySelector("#order_total_price").value = parseInt(days.value) * parseFloat(value.value)});
+</script>
