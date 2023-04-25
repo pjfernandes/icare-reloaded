@@ -24,6 +24,9 @@
                 <% if current_user.type == "Client" %>
                   <%= link_to "Meus pedidos", orders_path, class: "dropdown-item" %>
                 <% end %>
+                <% if current_user.type == "Caregiver" %>
+                  <%= link_to "Pedidos de clientes", orders_path, class: "dropdown-item" %>
+                <% end %>
                 <%= link_to "Editar perfil", edit_user_registration_path, class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, method: :delete, class: "dropdown-item" %>
               </div>

@@ -23,6 +23,14 @@ class OrdersController < ApplicationController
     end
   end
 
+  def update
+    order = Order.find(params[:id])
+    order.caregiver_accept = true
+    order.save
+    render orders_path
+  end
+
+
   private
   def order_params
     params.require(:order).permit(

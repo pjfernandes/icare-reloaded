@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
-  resources :orders
+  resources :orders do
+    collection do
+      get :order_accept
+    end
+  end
 
   resources :clients, only: [:new, :create] do
     resources :orders
@@ -13,4 +17,6 @@ Rails.application.routes.draw do
     resources :orders
   end
 
+  #get 'order_accept', to: 'orders#order_accept'
+  #put 'order_accept', to: 'orders#order_accept'
 end

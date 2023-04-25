@@ -1,20 +1,44 @@
-<h2 class="title mb-2 text-center"><i class="fa-solid fa-cart-shopping text-primary"></i> Meus pedidos</h2>
+<% if current_user.type == "Client" %>
+  <h2 class="title mb-2 text-center"><i class="fa-solid fa-cart-shopping text-primary"></i> Meus pedidos</h2>
+<% else %>
+    <h2 class="title mb-2 text-center"><i class="fa-solid fa-user text-info"></i> Meus clientes</h2>
+<% end %>
 
 <div class="caregivers-container ">
   <%@orders.each do |order|%>
-    <div class="card-product mt-3 mb-4 rounded d-flex justify-content-between p-2 border border-primary rounded">
-      <div class="card-product-infos text-break">
-        <h6><i class="fas fa-heart text-danger"></i> <%=Caregiver.find(order.caregiver_id).first_name.capitalize + " " + Caregiver.find(order.caregiver_id).last_name.capitalize%></h6>
-        <h6><i class="fa-solid fa-calendar text-secondary"></i> <%= order.created_at.strftime("%F") %></h6>
-        <h6><i class="fa-solid fa-notes-medical text-secondary"></i> <%=Caregiver.find(order.caregiver_id).care_type.capitalize %> para <%= order.days %> dias: <span class="text-primary">R$ <%= order.total_price %></span></h6>
+    <% if current_user.type == "Client" %>
+      <div class="card-product mt-3 mb-4 rounded d-flex justify-content-between p-2 border border-primary rounded">
+        <div class="card-product-infos text-break">
+          <h6><i class="fas fa-heart text-danger"></i> <%=Caregiver.find(order.caregiver_id).first_name.capitalize + " " + Caregiver.find(order.caregiver_id).last_name.capitalize%></h6>
+          <h6><i class="fa-solid fa-calendar text-secondary"></i> <%= order.created_at.strftime("%F") %></h6>
+          <h6><i class="fa-solid fa-notes-medical text-secondary"></i> <%=Caregiver.find(order.caregiver_id).care_type.capitalize %> para <%= order.days %> dias: <span class="text-primary">R$ <%= order.total_price %></span></h6>
+        </div>
+        <div class="buttons m-1">
+          <% unless order.caregiver_accept.nil? %>
+            <p><i class="fa-solid fa-check text-success"></i> Confirmado</p>
+          <% else %>
+            <p><i class="fa-solid fa-xmark text-danger"></i> Não confirmado</p>
+          <% end %>
+        </div>
       </div>
-      <div class="buttons m-1">
-        <% unless order.caregiver_accept.nil? %>
-          <p><i class="fa-solid fa-check text-success"></i> Confirmado</p>
-        <% else %>
-          <p><i class="fa-solid fa-xmark text-danger"></i> Não confirmado</p>
-        <% end %>
+    <% else %>
+      <div class="card-product mt-3 mb-4 rounded d-flex justify-content-between p-2 border border-primary rounded">
+        <div class="card-product-infos text-break">
+          <h6><i class="fas fa-user text-info"></i> Pedido enviado por <%= Client.find(order.client_id).first_name.capitalize + " " + Client.find(order.client_id).last_name.capitalize %> em <span class="text-warning"><%=order.created_at.strftime("%F")%></span></h6>
+          <h6><i class="fa-solid fa-notes-medical text-secondary"></i> <%=Caregiver.find(order.caregiver_id).care_type.capitalize %> para <%= order.days %> dias: <span class="text-primary">R$ <%= order.total_price %></span></h6>
+          <h6><i class="fa-solid fa-globe text-secondary"></i> <%=Client.find(order.client_id).street.capitalize %>, <%= Client.find(order.client_id).number %>, <%= Client.find(order.client_id).city.capitalize %> </h6>
+
+        </div>
+        <div class="buttons m-1">
+          <% unless order.caregiver_accept.nil? %>
+            <div class="btn btn-success disabled">Confirmado</div>
+          <% else %>
+          <%= form_for order do |f| %>
+            <%= f.submit "Confirmar", :name =>"order_accept", class: "btn btn-primary" %>
+          <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
+    <% end %>
   <%end%>
 </div>
