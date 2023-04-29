@@ -1,9 +1,9 @@
 <h2 class="title mb-2 text-center"><i class="fas fa-heart text-primary"></i> Cuidadores</h2>
 
-<div style="width: 100%; height: 300px;"
+<div style="width: 100%; height: 400px;"
   data-controller="map"
   data-map-markers-value="<%= @markers.to_json %>"
-  data-map-api-key-value="pk.eyJ1IjoicGpmZXJuYW5kZXMiLCJhIjoiY2t1c291Z3lzNWg2bzJvbW5kNWNhbnZhaCJ9.eYxvagOUGuS5qDo-zOfRCA"></div>
+  data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 <div class="caregivers-container ">
   <%@caregivers.each do |caregiver|%>
